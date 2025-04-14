@@ -75,7 +75,7 @@
             <i class="fa-solid fa-comments"></i>
             <div class="bar-content">
                 <h3>Free shipping</h3>
-                <p>On All orders drow 99$</p>
+                <p class="poppins-medium">On All orders drow 99$</p>
             </div>
         </div>
     </section>

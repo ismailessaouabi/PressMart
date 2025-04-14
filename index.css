@@ -131,7 +131,7 @@ ul{
 }
 ul li{
     cursor: pointer;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     color: #000;
     transition: all 0.6s ease;
@@ -181,13 +181,13 @@ main .main-content{
     height: fit-content;
 }
 main .main-content h1{
-    font-size: 70px;
-    font-weight: 900;
+    font-size: 62px;
+    font-weight: bold;
     color: #000;
 }
 main .main-content p{
     font-size: 30px;
-    font-weight:bold;
+    font-weight: 500;
     color: #000;
     margin-top: 20px;
 }   
@@ -226,7 +226,7 @@ main>img{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 30px 25px;
+    padding: 30px 75px;
 }
 .bar-item{
     display: flex;
@@ -239,4 +239,19 @@ main>img{
     color: #0066cb;
     cursor: pointer;
     transition: all 0.6s ease;
+}
+.bar-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bar-content>h3{
+    font-size: 18px;
+    color: #000000;
+}
+
+.bar-content>p{
+    font-size: 12px;
+    font-weight: 500;
 }
