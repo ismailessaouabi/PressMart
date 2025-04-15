@@ -292,6 +292,10 @@ body {
                 <i class="fas fa-box"></i>
                 <span>Produits</span>
             </a>
+            <a href="?page=categories" class="menu-item <?php echo ($page == 'categories') ? 'active' : ''; ?>">
+                <i class="fas fa-box"></i>
+                <span>Categories</span>
+            </a>
             <a href="?page=orders" class="menu-item <?php echo ($page == 'orders') ? 'active' : ''; ?>">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Commandes</span>
@@ -323,5 +327,3 @@ body {
     </div>
 </div>
 
-<!-- Contenu principal -->
-<main class="main-content">

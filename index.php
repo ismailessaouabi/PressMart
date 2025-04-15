@@ -3,7 +3,7 @@
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 // Liste des pages autorisées
-$allowed_pages = ['home', 'analytics', 'messages', 'users', 'products', 'orders', 'settings', 'help'];
+$allowed_pages = ['home', 'analytics', 'messages', 'users', 'products','categories' ,'orders', 'settings', 'help'];
 
 // Vérifier si la page demandée est valide
 if (!in_array($page, $allowed_pages)) {
