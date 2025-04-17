@@ -83,6 +83,29 @@
     <div class="container-pro">
         <h1>Ajouter un nouveau produit</h1>
         <?php
+        // Récupération des catégories avec gestion d'erreur
+try {
+    $stmt = $pdo->query("SELECT * FROM categories");
+    if ($stmt) {
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $categories = [];
+        echo "<p>Erreur lors de la récupération des catégories</p>";
+    }
+} catch (PDOException $e) {
+    $categories = [];
+    error_log("Erreur base de données: " . $e->getMessage());
+    echo "<p>Problème d'accès à la base de données</p>";
+}
+
+// Vérifiez ensuite les noms exacts des colonnes
+if (!empty($categories)) {
+    // Afficher la première catégorie pour vérifier les noms des colonnes
+    $first_category = $categories[0];
+    echo "<pre>";
+    print_r($first_category);
+    echo "</pre>";
+}
         // Vérification de la soumission du formulaire
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $nom = $_POST['nom'];
@@ -94,18 +117,19 @@
             // Gestion de l'image
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
                 $image = $_FILES['image'];
-                $imagePath = 'uploads/' . basename($image['name']);
+                $imagePath = 'images/' . basename($image['name']);
                 move_uploaded_file($image['tmp_name'], $imagePath);
             } else {
                 $imagePath = null;
             }
 
             // Insertion dans la base de données
-            $stmt = $pdo->prepare("INSERT INTO produCts (img ,nom, prix, quantite, descretion,categorie) VALUES (?, ?, ?, ?, ?, ?)");
-            if ($stmt->execute([$imagePath, $nom, $prix, $quantite,$description, $categorie, ])) {
-                echo "<p style='color: green;'>Produit ajouté avec succès !</p>";
-            } else {
-                echo "<p style='color: red;'>Erreur lors de l'ajout du produit.</p>";
+            try {
+                $stmt = $pdo->prepare("INSERT INTO products (nom, description, prix, qauntitie, img, idCat) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$nom, $description, $prix, $quantite, $imagePath, $categorie]);
+                echo "<p>Produit ajouté avec succès !</p>";
+            } catch (PDOException $e) {
+                echo "<p>Erreur lors de l'ajout du produit: " . htmlspecialchars($e->getMessage()) . "</p>";
             }
         }
         ?>
@@ -138,15 +162,16 @@
             </div>
             
             <div class="form-group">
-                <label for="categorie">Catégorie</label>
-                <select id="categorie" name="categorie">
-                    <option value="">-- Sélectionnez une catégorie --</option>
-                    <option value="electronique">Électronique</option>
-                    <option value="vetements">Vêtements</option>
-                    <option value="alimentation">Alimentation</option>
-                    <option value="maison">Maison</option>
-                    <option value="autre">Autre</option>
-                </select>
+            <label for="categorie">Catégorie</label>
+<select id="categorie" name="categorie" required>
+    <option value="">-- Sélectionnez une catégorie --</option>
+    <?php 
+    // Affichage des catégories dans le menu déroulant
+    foreach ($categories as $category) {
+        echo "<option value='" . htmlspecialchars($category['idC']) . "'>" . htmlspecialchars($category['nom']) . "</option>";
+    }
+    ?>
+</select>
             </div>
             
            

@@ -256,7 +256,7 @@ body {
 <div class="sidebar">
     <div class="sidebar-header">
         <div class="logo">
-            <i class="fas fa-rocket"></i>
+            <i class="fa-brands fa-atlassian"></i>
             <span class="logo-text">Dashboard</span>
         </div>
         <button class="toggle-btn">
