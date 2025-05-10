@@ -17,7 +17,7 @@ include 'includes/header.php';
 include 'includes/sidebar.php';
 
 // Inclure le contenu de la page demandée
-include "pages/$page.php";
+include "dashboard/$page.php";
 
 // Inclure le pied de page
 include 'includes/footer.php';
